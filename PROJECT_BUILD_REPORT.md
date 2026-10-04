@@ -10,9 +10,10 @@
 - Database: explicit constraints, FKs, indexes, and Flyway V1 migration; Hibernate validates only.
 - Docker: multi-stage non-root image and Compose application/PostgreSQL stack.
 - Documentation: README, architecture, database, API, and concurrency ADR.
-- Validation: Maven package passed on Java 21.0.12.1. Two domain unit tests passed. Eight PostgreSQL/Testcontainers tests are implemented (including rollback and concurrency), but the full Maven run could not start Testcontainers because the Maven process lacked direct Docker-socket access. `docker compose config` passed. A Docker image built successfully (with host networking required for Maven dependency DNS). Compose started from an empty PostgreSQL 17 volume, Flyway applied V1, health returned 200, and create product/set stock/reserve/cancel smoke operations passed. Containers were stopped after validation.
+- Validation: Testcontainers 1.21.4 connected to Docker 29.8.0 through the local Unix socket and started real PostgreSQL 17.11 containers. Two consecutive full `mvn test` runs passed 10/10 tests with zero failures, errors, or skips. Each integration context began with an empty schema, Flyway applied V1, and Hibernate validated the resulting schema. The concurrency test used inventory 5 and two simultaneous requests for 4: exactly one succeeded, one was rejected, and final inventory was 1. `mvn clean package` and `docker compose config` passed. Earlier Compose smoke validation also passed.
 - Known limitations: no authentication, audit ledger, automatic expiry scheduler, distributed guarantees, or production history.
 - Future improvements: idempotency keys, expiry worker, audit events, pagination, authorized administration.
 - AI-assisted status: AI-assisted construction; candidate review and ability to explain are required.
 - Publication: not published; waiting for human review. Evidence: not imported.
-- Git commits: to be filled from the real local repository after validation.
+- Git commits: `bd9d02b` initialization; `1f32ca8` transactional domain/API; `1f602ab` PostgreSQL and concurrency tests; `878c7b6` documentation; Phase 4.1.1a validation-fix commit recorded in repository history.
+- Final state: `WAITING_HUMAN_REVIEW`; publication remains `NOT_AUTHORIZED`; evidence remains `NOT_IMPORTED`.
