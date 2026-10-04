@@ -1,0 +1,1 @@
+package dev.henrique.inventory.domain; public class InvalidTransitionException extends RuntimeException { public InvalidTransitionException(ReservationStatus from,ReservationStatus to){super("Transition from %s to %s is not allowed".formatted(from,to));} }

@@ -1,0 +1,1 @@
+package dev.henrique.inventory.domain; import java.util.UUID; public class InsufficientInventoryException extends RuntimeException { public InsufficientInventoryException(UUID id,int requested,int available){super("Product %s has %d available; %d requested".formatted(id,available,requested));} }

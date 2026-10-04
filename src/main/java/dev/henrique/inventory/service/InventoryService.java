@@ -1,0 +1,5 @@
+package dev.henrique.inventory.service;
+import dev.henrique.inventory.domain.*; import dev.henrique.inventory.repository.*; import jakarta.persistence.EntityManager; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; import java.util.UUID;
+@Service public class InventoryService { private final ProductRepository products; private final InventoryRepository inventory; private final EntityManager entityManager; public InventoryService(ProductRepository p,InventoryRepository i,EntityManager e){products=p;inventory=i;entityManager=e;}
+ @Transactional public Inventory set(UUID productId,int quantity){Product p=products.findById(productId).orElseThrow(()->new ResourceNotFoundException("Product not found: "+productId));Inventory row=inventory.findById(productId).orElse(null);if(row==null){row=new Inventory(p,quantity);entityManager.persist(row);}else row.setAvailableQuantity(quantity);return row;} @Transactional(readOnly=true) public Inventory get(UUID id){return inventory.findById(id).orElseThrow(()->new ResourceNotFoundException("Inventory not found: "+id));}
+}

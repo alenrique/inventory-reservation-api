@@ -1,0 +1,6 @@
+package dev.henrique.inventory.domain;
+import jakarta.persistence.*; import java.time.Instant; import java.util.*;
+@Entity @Table(name="reservations") public class Reservation {
+ @Id private UUID id; @Enumerated(EnumType.STRING) @Column(nullable=false,length=20) private ReservationStatus status; @Column(name="created_at",nullable=false) private Instant createdAt; @Column(name="updated_at",nullable=false) private Instant updatedAt; @OneToMany(mappedBy="reservation",cascade=CascadeType.ALL,orphanRemoval=true) private List<ReservationItem> items=new ArrayList<>();
+ public Reservation(){id=UUID.randomUUID();status=ReservationStatus.PENDING;createdAt=updatedAt=Instant.now();} public void addItem(Product p,int q){items.add(new ReservationItem(this,p,q));} public void transitionTo(ReservationStatus target){if(status!=ReservationStatus.PENDING||!(target==ReservationStatus.CONFIRMED||target==ReservationStatus.CANCELLED||target==ReservationStatus.EXPIRED))throw new InvalidTransitionException(status,target);status=target;updatedAt=Instant.now();} public UUID getId(){return id;} public ReservationStatus getStatus(){return status;} public Instant getCreatedAt(){return createdAt;} public Instant getUpdatedAt(){return updatedAt;} public List<ReservationItem> getItems(){return List.copyOf(items);}
+}
