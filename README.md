@@ -49,4 +49,4 @@ Errors have timestamp, HTTP status/error, stable code, message, path, and valida
 
 This is intentionally one service without authentication, messaging, distributed locks, or observability infrastructure. Use it behind appropriate network controls; change local credentials outside development and do not expose management endpoints broadly. Pessimistic locks favor correctness and simplicity but reduce throughput on hot products. Expiration is modeled but no scheduler runs it yet. Inventory adjustment is an administrative absolute-set operation; production systems would add authorization and an audit ledger. Future work could add idempotency keys, scheduled expiration, audit history, pagination, and authenticated administrative operations.
 
-Created on 2026-10-04 as an AI-assisted portfolio project. It requires Henrique's review before publication or evidence import and makes no claim of historical or production use.
+Created on 2026-10-04 as an AI-assisted portfolio project. Henrique completed the technical review and approved publication on 2026-10-05. The project makes no claim of historical or production use.

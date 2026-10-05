@@ -14,6 +14,6 @@
 - Known limitations: no authentication, audit ledger, automatic expiry scheduler, distributed guarantees, or production history.
 - Future improvements: idempotency keys, expiry worker, audit events, pagination, authorized administration.
 - AI-assisted status: AI-assisted construction; candidate review and ability to explain are required.
-- Publication: not published; waiting for human review. Evidence: not imported.
+- Publication: publicly published after Henrique's completed technical review and explicit authorization on 2026-10-05. Public evidence was imported through the Career Agent.
 - Git commits: `bd9d02b` initialization; `1f32ca8` transactional domain/API; `1f602ab` PostgreSQL and concurrency tests; `878c7b6` documentation; `2c2504f` Testcontainers/Docker validation fix.
-- Final state: `WAITING_HUMAN_REVIEW`; publication remains `NOT_AUTHORIZED`; evidence remains `NOT_IMPORTED`.
+- Final state: `EVIDENCE_IMPORTED`; review is `REVIEWED`; publication is `PUBLISHED`.
